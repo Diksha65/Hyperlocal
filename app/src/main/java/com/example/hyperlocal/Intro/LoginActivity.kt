@@ -1,10 +1,12 @@
-package com.example.hyperlocal
+package com.example.hyperlocal.Intro
 
 import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.hyperlocal.*
+import com.example.hyperlocal.Model.User
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
@@ -45,7 +47,9 @@ class LoginActivity : AppCompatActivity() {
             startApp()
         } else {
             sign_in_button.setOnClickListener {
-                startActivityForResult(createGoogleLoginIntent(), RC_SIGN_IN)
+                startActivityForResult(createGoogleLoginIntent(),
+                    RC_SIGN_IN
+                )
             }
         }
     }
@@ -80,6 +84,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun startApp() {
         snackbar("Successful sign in!")
-        finishAndStart(NavigationDrawerActivity::class.java)
+        finishAndStart(MainActivity::class.java)
     }
 }

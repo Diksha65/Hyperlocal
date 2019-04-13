@@ -1,4 +1,4 @@
-package com.example.hyperlocal
+package com.example.hyperlocal.Model
 
 class User (
     var ID : String = "",

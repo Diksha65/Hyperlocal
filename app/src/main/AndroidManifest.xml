@@ -10,15 +10,15 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".NavigationDrawerActivity"
+                android:name=".MainActivity"
                 android:label="@string/title_activity_navigation_drawer"
-                android:parentActivityName=".LoginActivity"
+                android:parentActivityName=".Intro.LoginActivity"
                 android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.example.hyperlocal.LoginActivity"/>
+                    android:value="com.example.hyperlocal.Intro.LoginActivity"/>
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Intro.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

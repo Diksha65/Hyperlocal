@@ -1,20 +1,26 @@
 package com.example.hyperlocal
 
 import android.os.Bundle
+import android.support.annotation.DrawableRes
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_navigation_drawer.*
 import kotlinx.android.synthetic.main.app_bar_navigation_drawer.*
 
-class NavigationDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var auth: FirebaseAuth
+
+    inner class ProductCategory (val name : String,@DrawableRes val imageID : Int)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,11 +29,6 @@ class NavigationDrawerActivity : AppCompatActivity(), NavigationView.OnNavigatio
 
         auth = FirebaseAuth.getInstance()
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
@@ -35,6 +36,27 @@ class NavigationDrawerActivity : AppCompatActivity(), NavigationView.OnNavigatio
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+    }
+
+    inner class ProductCategoryAdapter(val categorylist: ArrayList<ProductCategory>) : RecyclerView.Adapter<ProductCategoryAdapter.ProductCategoryHolder>() {
+
+        override fun getItemCount() = categorylist.size
+
+        override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ProductCategoryHolder {
+            //return ProductCategoryHolder( p0.inflate(R.layout.grid_item_view))
+        }
+
+        override fun onBindViewHolder(p0: ProductCategoryHolder, p1: Int) {
+            p0.bindItems(categorylist[p1])
+        }
+
+        inner class ProductCategoryHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+            fun bindItems(category : ProductCategory) {
+                itemView.apply {
+
+                }
+            }
+        }
     }
 
     override fun onBackPressed() {
@@ -68,7 +90,7 @@ class NavigationDrawerActivity : AppCompatActivity(), NavigationView.OnNavigatio
                 // Handle the camera action
             }
             R.id.nav_logout -> {
-                auth.signOut()
+
             }
             R.id.nav_share -> {
 
