@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_navigation_drawer.*
 import kotlinx.android.synthetic.main.app_bar_navigation_drawer.*
 import kotlinx.android.synthetic.main.content_navigation_drawer.*
-import kotlinx.android.synthetic.main.grid_item_view.view.*
+import kotlinx.android.synthetic.main.category_item_view.view.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         override fun getItemCount() = categorylist.size
 
         override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CategoryHolder {
-            return CategoryHolder(LayoutInflater.from(p0.context).inflate(R.layout.grid_item_view, p0, false))
+            return CategoryHolder(LayoutInflater.from(p0.context).inflate(R.layout.category_item_view, p0, false))
         }
 
         override fun onBindViewHolder(p0: CategoryHolder, p1: Int) {
