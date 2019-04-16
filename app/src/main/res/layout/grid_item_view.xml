@@ -14,7 +14,7 @@
         <android.support.constraint.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-            <ImageVieww
+            <ImageView
                     android:layout_width="170dp"
                     android:layout_height="145dp"
                     android:id="@+id/category_image"
