@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, CategoryFragment())
+            .add(R.id.fragment_container, CategoryFragment())
             .commit()
     }
 
