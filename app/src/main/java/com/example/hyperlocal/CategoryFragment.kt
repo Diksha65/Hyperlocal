@@ -24,19 +24,19 @@ class CategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val categories = arrayListOf(
+            ProductCategory(resources.getString(R.string.Clothing), R.drawable.clothing),
+            ProductCategory(resources.getString(R.string.Accessories), R.drawable.accessories),
+            ProductCategory(resources.getString(R.string.Books), R.drawable.books),
+            ProductCategory(resources.getString(R.string.Groceries), R.drawable.groceries),
+            ProductCategory(resources.getString(R.string.Electronics), R.drawable.electronics),
+            ProductCategory(resources.getString(R.string.Sports), R.drawable.sports)
+        )
+
         productCategoryRecyclerView.layoutManager = GridLayoutManager(context, 2)
         productCategoryRecyclerView.setHasFixedSize(true)
         productCategoryRecyclerView.adapter = CategoryAdapter(categories)
     }
-
-    private val categories = arrayListOf(
-        ProductCategory("Clothing", R.drawable.clothing),
-        ProductCategory("Accessories", R.drawable.accessories),
-        ProductCategory("Books", R.drawable.books),
-        ProductCategory("Groceries", R.drawable.groceries),
-        ProductCategory("Electronics", R.drawable.electronics),
-        ProductCategory("Sports", R.drawable.sports)
-    )
 
     inner class CategoryAdapter(val categorylist: ArrayList<ProductCategory>) : RecyclerView.Adapter<CategoryAdapter.CategoryHolder>() {
 
@@ -59,10 +59,18 @@ class CategoryFragment : Fragment() {
                     arrayOf(category_image, category_name).forEach {
                         it.setOnClickListener {
                             Log.e("Griditem", category.name)
+                            loadFragment(SubCategoryFragment.newInstance(category.name))
                         }
                     }
                 }
             }
         }
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        fragmentManager?.beginTransaction()
+            ?.replace(R.id.fragment_container, fragment, this.javaClass.simpleName)
+            ?.addToBackStack(this.javaClass.simpleName)
+            ?.commit() ?: Log.e("Category","Null Fragment Manager")
     }
 }
