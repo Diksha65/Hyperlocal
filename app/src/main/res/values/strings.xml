@@ -7,4 +7,13 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <!-->Categories<-->
+    <string name="Clothing">Clothing</string>
+    <string name="Accessories">Accessories</string>
+    <string name="Groceries">Groceries</string>
+    <string name="Sports">Sports</string>
+    <string name="Books">Books</string>
+    <string name="Electronics">Electronics</string>
+
 </resources>
