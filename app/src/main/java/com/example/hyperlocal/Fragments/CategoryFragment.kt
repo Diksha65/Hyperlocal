@@ -1,4 +1,4 @@
-package com.example.hyperlocal
+package com.example.hyperlocal.Fragments
 
 import android.os.Bundle
 import android.support.annotation.DrawableRes
@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.example.hyperlocal.R
 import kotlinx.android.synthetic.main.category_item_view.view.*
 import kotlinx.android.synthetic.main.fragment_recyclerview.*
 
@@ -25,12 +26,24 @@ class CategoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val categories = arrayListOf(
-            ProductCategory(resources.getString(R.string.Clothing), R.drawable.clothing),
-            ProductCategory(resources.getString(R.string.Accessories), R.drawable.accessories),
-            ProductCategory(resources.getString(R.string.Books), R.drawable.books),
-            ProductCategory(resources.getString(R.string.Groceries), R.drawable.groceries),
-            ProductCategory(resources.getString(R.string.Electronics), R.drawable.electronics),
-            ProductCategory(resources.getString(R.string.Sports), R.drawable.sports)
+            ProductCategory(resources.getString(R.string.Clothing),
+                R.drawable.clothing
+            ),
+            ProductCategory(resources.getString(R.string.Accessories),
+                R.drawable.accessories
+            ),
+            ProductCategory(resources.getString(R.string.Books),
+                R.drawable.books
+            ),
+            ProductCategory(resources.getString(R.string.Groceries),
+                R.drawable.groceries
+            ),
+            ProductCategory(resources.getString(R.string.Electronics),
+                R.drawable.electronics
+            ),
+            ProductCategory(resources.getString(R.string.Sports),
+                R.drawable.sports
+            )
         )
 
         productCategoryRecyclerView.layoutManager = GridLayoutManager(context, 2)

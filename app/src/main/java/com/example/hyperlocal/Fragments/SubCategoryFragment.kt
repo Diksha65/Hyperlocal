@@ -1,4 +1,4 @@
-package com.example.hyperlocal
+package com.example.hyperlocal.Fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.hyperlocal.Model.SubCategory
+import com.example.hyperlocal.R
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
