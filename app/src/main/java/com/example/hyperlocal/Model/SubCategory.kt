@@ -1,9 +1,9 @@
 package com.example.hyperlocal.Model
 
 class SubCategory (
-    var id : String = "",
+    var ID : String = "",
     var name : String = "",
     var image : String = "",
-    var category : Map<String, String> = hashMapOf("id" to "", "name" to "")
+    var category : Map<String, String> = mapOf("id" to "", "name" to "")
 
 )

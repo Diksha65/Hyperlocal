@@ -77,6 +77,7 @@ class SubCategoryFragment : Fragment() {
                 subcategory_name.text = subCategory.name
                 subcategory_name.setOnClickListener {
                     Log.e("SubCategory", subCategory.name + " is clicked")
+                    Log.e("Subcategorymodel", subCategory.category["name"])
                     loadFragment(ProductFragment.newInstance(categoryName!!, subCategory.name))
                 }
             }
