@@ -55,7 +55,6 @@ class SubCategoryFragment : Fragment() {
             .setQuery(query, SubCategory::class.java)
             .build()
 
-        Log.e("FirestoreOptions", firestoreOptions.toString())
         val firestoreRecyclerAdapter = object : FirestoreRecyclerAdapter<SubCategory, SubCategoryHolder>(firestoreOptions) {
             override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SubCategoryHolder {
                 return SubCategoryHolder(

@@ -1,13 +1,24 @@
 package com.example.hyperlocal.Fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.hyperlocal.Model.Product
 import com.example.hyperlocal.R
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import kotlinx.android.synthetic.main.product_item_view.view.*
+import kotlinx.android.synthetic.main.product_recyclerview.*
 import kotlinx.android.synthetic.main.sample.*
 
 class ProductFragment : Fragment() {
@@ -40,5 +51,64 @@ class ProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Toast.makeText(context, subCategoryName, Toast.LENGTH_SHORT).show()
+
+        val firestoreQuery = firestore.collection("products")
+            .whereEqualTo("subcategory.name", subCategoryName)
+
+        setupFirestoreRecyclerView(firestoreQuery)
+    }
+
+    private fun setupFirestoreRecyclerView (query: Query) {
+        val firestoreOptions = FirestoreRecyclerOptions.Builder<Product>()
+            .setLifecycleOwner(this)
+            .setQuery(query, Product::class.java)
+            .build()
+
+        Log.e("FirestoreProductOptions", firestoreOptions.toString())
+        val firestoreRecyclerAdapter = object : FirestoreRecyclerAdapter<Product, ProductHolder>(firestoreOptions) {
+            override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ProductHolder {
+                return ProductHolder(
+                    LayoutInflater.from(p0.context).inflate(R.layout.product_item_view, p0, false)
+                )
+            }
+            override fun onBindViewHolder(holder: ProductHolder, position: Int, model: Product) {
+                holder.bindItems(model)
+            }
+        }
+        productRecyclerView.layoutManager = LinearLayoutManager(context)
+        productRecyclerView.adapter = firestoreRecyclerAdapter
+    }
+
+    inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bindItems(product: Product) {
+            itemView.apply {
+                product_store_name.text = product.store["name"]
+                product_cost_value.text = product.store["cost"]
+                product_store_location.text = product.store["location"]
+
+                arrayOf(
+                    product_store_location_icon,
+                    product_store_location
+                ).forEach {
+                    it.setOnClickListener {
+                        val uri = "http://maps.google.co.in/maps?q=${product.store["location"]}"
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+                        startActivity(intent)
+                    }
+                }
+
+                arrayOf(
+                    itemView,
+                    product_store_name,
+                    product_cost_value,
+                    product_image,
+                    product_cost
+                ).forEach {
+                    it.setOnClickListener {
+                        Log.e("Product clicked", product.name + " " + product.store["name"])
+                    }
+                }
+            }
+        }
     }
 }
