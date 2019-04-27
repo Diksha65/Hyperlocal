@@ -6,21 +6,18 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.*
-import com.example.hyperlocal.Fragments.CategoryFragment
-import com.google.firebase.auth.FirebaseAuth
+import com.example.hyperlocal.extensions.replaceFragment
+import com.example.hyperlocal.fragments.CategoryFragment
 import kotlinx.android.synthetic.main.activity_navigation_drawer.*
 import kotlinx.android.synthetic.main.app_bar_navigation_drawer.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation_drawer)
         setSupportActionBar(toolbar)
-
-        auth = FirebaseAuth.getInstance()
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -30,9 +27,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
 
-        supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, CategoryFragment())
-            .commit()
+        replaceFragment(R.id.fragment_container, CategoryFragment())
     }
 
     override fun onBackPressed() {

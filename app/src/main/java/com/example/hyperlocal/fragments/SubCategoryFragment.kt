@@ -1,4 +1,4 @@
-package com.example.hyperlocal.Fragments
+package com.example.hyperlocal.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,11 +8,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.hyperlocal.Model.SubCategory
+import com.example.hyperlocal.extensions.replaceFragment
+import com.example.hyperlocal.extensions.subCategoryCollection
+import com.example.hyperlocal.model.SubCategory
 import com.example.hyperlocal.R
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_recyclerview.*
 import kotlinx.android.synthetic.main.subcategory_item_view.view.*
@@ -21,7 +22,6 @@ import kotlinx.android.synthetic.main.subcategory_item_view.view.*
 class SubCategoryFragment : Fragment() {
 
     private var categoryName : String? = null
-    val firestore = FirebaseFirestore.getInstance()
 
     companion object {
         @JvmStatic
@@ -43,10 +43,8 @@ class SubCategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val firestoreQuery = firestore.collection("subcateogry")
-            .whereEqualTo("category.name", categoryName)
-
-        setupFirestoreRecyclerView(firestoreQuery)
+        setupFirestoreRecyclerView(subCategoryCollection
+            .whereEqualTo("category.name", categoryName))
     }
 
     private fun setupFirestoreRecyclerView (query: Query) {
@@ -77,16 +75,12 @@ class SubCategoryFragment : Fragment() {
                 subcategory_name.setOnClickListener {
                     Log.e("SubCategory", subCategory.name + " is clicked")
                     Log.e("Subcategorymodel", subCategory.category["name"])
-                    loadFragment(ProductFragment.newInstance(categoryName!!, subCategory.name))
+                    replaceFragment(
+                        R.id.fragment_container,
+                        ProductFragment.newInstance(categoryName!!, subCategory.name)
+                    )
                 }
             }
         }
-    }
-
-    private fun loadFragment(fragment: Fragment) {
-        fragmentManager?.beginTransaction()
-            ?.replace(R.id.fragment_container, fragment, this.javaClass.simpleName)
-            ?.addToBackStack(this.javaClass.simpleName)
-            ?.commit() ?: Log.e("Category","Null Fragment Manager")
     }
 }

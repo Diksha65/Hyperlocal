@@ -1,4 +1,4 @@
-package com.example.hyperlocal.Fragments
+package com.example.hyperlocal.fragments
 
 import android.content.Intent
 import android.net.Uri
@@ -11,21 +11,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.hyperlocal.Model.Product
+import com.example.hyperlocal.extensions.productCollection
+import com.example.hyperlocal.MainActivity
+import com.example.hyperlocal.model.Product
+import com.example.hyperlocal.ProductActivity
 import com.example.hyperlocal.R
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.product_item_view.view.*
 import kotlinx.android.synthetic.main.product_recyclerview.*
-import kotlinx.android.synthetic.main.sample.*
 
 class ProductFragment : Fragment() {
 
     private var categoryName : String? = null
     private var subCategoryName : String? = null
-    val firestore = FirebaseFirestore.getInstance()
 
     companion object {
         @JvmStatic
@@ -52,10 +52,8 @@ class ProductFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Toast.makeText(context, subCategoryName, Toast.LENGTH_SHORT).show()
 
-        val firestoreQuery = firestore.collection("products")
-            .whereEqualTo("subcategory.name", subCategoryName)
-
-        setupFirestoreRecyclerView(firestoreQuery)
+        setupFirestoreRecyclerView(productCollection
+            .whereEqualTo("subcategory.name", subCategoryName))
     }
 
     private fun setupFirestoreRecyclerView (query: Query) {
@@ -106,6 +104,11 @@ class ProductFragment : Fragment() {
                 ).forEach {
                     it.setOnClickListener {
                         Log.e("Product clicked", product.name + " " + product.store["name"])
+                        (activity as MainActivity).let{
+                            val intent = Intent (it, ProductActivity::class.java)
+                            Log.e("Intent", intent.toString())
+                            it.startActivity(intent)
+                        }
                     }
                 }
             }

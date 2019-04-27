@@ -1,4 +1,4 @@
-package com.example.hyperlocal.Model
+package com.example.hyperlocal.model
 
 class Store (
     var ID : String = "",

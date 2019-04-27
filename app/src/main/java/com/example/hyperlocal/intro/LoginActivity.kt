@@ -1,4 +1,4 @@
-package com.example.hyperlocal.Intro
+package com.example.hyperlocal.intro
 
 import android.app.Activity
 import android.content.Intent
@@ -6,18 +6,18 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.hyperlocal.*
-import com.example.hyperlocal.Model.User
+import com.example.hyperlocal.extensions.Firebase.auth
+import com.example.hyperlocal.extensions.finishAndStart
+import com.example.hyperlocal.extensions.snackbar
+import com.example.hyperlocal.extensions.usersCollection
+import com.example.hyperlocal.model.User
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
-    private lateinit var firestore : FirebaseFirestore
     private var user = User()
 
     companion object {
@@ -40,16 +40,11 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        auth = FirebaseAuth.getInstance()
-        firestore = FirebaseFirestore.getInstance()
-
         if(auth.currentUser != null) {
             startApp()
         } else {
             sign_in_button.setOnClickListener {
-                startActivityForResult(createGoogleLoginIntent(),
-                    RC_SIGN_IN
-                )
+                startActivityForResult(createGoogleLoginIntent(), RC_SIGN_IN)
             }
         }
     }
@@ -66,8 +61,7 @@ class LoginActivity : AppCompatActivity() {
                 user.name = auth.currentUser!!.displayName.toString()
                 user.email = auth.currentUser!!.email.toString()
 
-                firestore.collection("users")
-                    .document(auth.currentUser!!.email.toString())
+                usersCollection.document(auth.currentUser!!.email.toString())
                     .set(user)
                     .addOnSuccessListener {
                         Log.d("UserAdded", "Document Snapshot added with ID: " + user.ID)
