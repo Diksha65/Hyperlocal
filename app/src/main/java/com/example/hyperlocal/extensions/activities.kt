@@ -20,15 +20,8 @@ fun AppCompatActivity.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
-fun AppCompatActivity.logError(error : Throwable){ logError(getSimpleName(), error) }
-
-fun logError(error : Throwable) { logError("GlobalLog", error)}
-fun logError(tag : String, exception: Throwable) {
-    exception.printStackTrace()
-    val text = exception.message ?: "NullErrorMessage"
-    Log.e(tag, text)
-    Crashlytics.log(Log.ERROR, "F.$tag", text)
-}
+fun AppCompatActivity.logError(error : Throwable){ logError(getTag(), error) }
+fun AppCompatActivity.logDebug(message : String?) { logDebug(getTag(), message) }
 
 /**
  * Switch between activities

@@ -11,7 +11,6 @@ import com.example.hyperlocal.BaseFragment
 import com.example.hyperlocal.extensions.categoryCollection
 import com.example.hyperlocal.model.Category
 import com.example.hyperlocal.R
-import com.example.hyperlocal.extensions.getTag
 import com.example.hyperlocal.extensions.replaceFragment
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions

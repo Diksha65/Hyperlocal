@@ -9,7 +9,15 @@ fun Fragment.getSimpleName() : String {
 }
 
 fun Fragment.logError(error : Throwable) {
+    val name = getSimpleName()
+    val length = Math.min(name.length - 1, 20)
+    logError(name.substring(0..length), error)
+}
 
+fun Fragment.logDebug(message : String?) {
+    val name = getSimpleName()
+    val length = Math.min(name.length - 1, 20)
+    logDebug(name.substring(0..length), message)
 }
 
 fun Fragment.replaceFragment(containerID: Int, fragment: Fragment) {

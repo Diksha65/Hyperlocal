@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.hyperlocal.BaseFragment
 import com.example.hyperlocal.extensions.productCollection
 import com.example.hyperlocal.MainActivity
 import com.example.hyperlocal.model.Product
@@ -22,7 +23,7 @@ import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.product_item_view.view.*
 import kotlinx.android.synthetic.main.product_recyclerview.*
 
-class ProductFragment : Fragment() {
+class ProductFragment : BaseFragment() {
 
     private var categoryName : String? = null
     private var subCategoryName : String? = null
