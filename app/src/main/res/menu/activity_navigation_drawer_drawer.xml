@@ -5,9 +5,29 @@
 
     <group android:checkableBehavior="single">
         <item
-                android:id="@+id/nav_location"
-                android:icon="@drawable/ic_menu_location"
-                android:title="Manage Location"/>
+                android:id="@+id/nav_permission"
+                android:icon="@drawable/permission"
+                android:title="Manage Permissions"/>
+
+        <item
+                android:id="@+id/nav_category"
+                android:icon="@drawable/category"
+                android:title="Add Category"/>
+
+        <item
+                android:id="@+id/nav_subcategory"
+                android:icon="@drawable/subcategory"
+                android:title="Add SubCategory"/>
+
+        <item
+                android:id="@+id/nav_product"
+                android:icon="@drawable/product"
+                android:title="Add Product"/>
+
+        <item
+                android:id="@+id/nav_store"
+                android:icon="@drawable/store"
+                android:title="Add Store"/>
 
         <item
                 android:id="@+id/nav_logout"

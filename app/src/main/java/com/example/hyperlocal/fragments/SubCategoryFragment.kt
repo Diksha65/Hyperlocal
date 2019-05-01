@@ -1,14 +1,12 @@
 package com.example.hyperlocal.fragments
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.hyperlocal.extensions.replaceFragment
+import com.example.hyperlocal.BaseFragment
 import com.example.hyperlocal.extensions.subCategoryCollection
 import com.example.hyperlocal.model.SubCategory
 import com.example.hyperlocal.R
@@ -19,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_recyclerview.*
 import kotlinx.android.synthetic.main.subcategory_item_view.view.*
 
 
-class SubCategoryFragment : Fragment() {
+class SubCategoryFragment : BaseFragment() {
 
     private var categoryName : String? = null
 
@@ -73,8 +71,8 @@ class SubCategoryFragment : Fragment() {
             itemView.apply {
                 subcategory_name.text = subCategory.name
                 subcategory_name.setOnClickListener {
-                    Log.e("SubCategory", subCategory.name + " is clicked")
-                    Log.e("Subcategorymodel", subCategory.category["name"])
+                    logDebug(subCategory.name + " is clicked")
+                    logDebug(subCategory.category["name"])
                     replaceFragment(
                         R.id.fragment_container,
                         ProductFragment.newInstance(categoryName!!, subCategory.name)

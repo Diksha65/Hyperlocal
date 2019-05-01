@@ -6,17 +6,19 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.hyperlocal.*
+import com.example.hyperlocal.extensions.*
 import com.example.hyperlocal.extensions.Firebase.auth
-import com.example.hyperlocal.extensions.finishAndStart
-import com.example.hyperlocal.extensions.snackbar
-import com.example.hyperlocal.extensions.usersCollection
 import com.example.hyperlocal.model.User
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
+import com.crashlytics.android.Crashlytics
+import io.fabric.sdk.android.Fabric
 
-class LoginActivity : AppCompatActivity() {
+
+
+class LoginActivity : BaseActivity() {
 
     private var user = User()
 
@@ -39,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        Fabric.with(this, Crashlytics())
 
         if(auth.currentUser != null) {
             startApp()
@@ -64,11 +67,11 @@ class LoginActivity : AppCompatActivity() {
                 usersCollection.document(auth.currentUser!!.email.toString())
                     .set(user)
                     .addOnSuccessListener {
-                        Log.d("UserAdded", "Document Snapshot added with ID: " + user.ID)
+                        logDebug("Document Snapshot added with ID: " + user.ID)
                         startApp()
                     }
                     .addOnFailureListener { e ->
-                        Log.e("UserNotAdded", "Error adding document", e)
+                        logError("Error adding document", e)
                     }
             }
         } else {

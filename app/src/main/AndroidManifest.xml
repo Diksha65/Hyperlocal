@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools" package="com.example.hyperlocal">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -31,11 +33,21 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.example.hyperlocal.intro.LoginActivity"/>
         -->
+        <meta-data
+                android:name="io.fabric.ApiKey"
+                android:value="8f01b9cf8449ea2ff7e651bc19feceb0b7d0fdc4" />
 
         <activity android:name=".ProductActivity"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".navigationactivity.AddCategoryActivity"
                   android:screenOrientation="portrait"
-                  android:configChanges="orientation|keyboardHidden|screenLayout|screenSize"
-                  android:theme="@style/FullscreenTheme"/>
+                  android:parentActivityName=".MainActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.example.hyperlocal.MainActivity"/>
+        </activity>
+
     </application>
 
 </manifest>

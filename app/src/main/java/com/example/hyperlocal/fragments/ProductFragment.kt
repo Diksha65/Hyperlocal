@@ -17,13 +17,15 @@ import com.example.hyperlocal.MainActivity
 import com.example.hyperlocal.model.Product
 import com.example.hyperlocal.ProductActivity
 import com.example.hyperlocal.R
+import com.example.hyperlocal.extensions.logDebug
+import com.example.hyperlocal.extensions.logError
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.product_item_view.view.*
 import kotlinx.android.synthetic.main.product_recyclerview.*
 
-class ProductFragment : BaseFragment() {
+class ProductFragment : Fragment() {
 
     private var categoryName : String? = null
     private var subCategoryName : String? = null
@@ -63,7 +65,6 @@ class ProductFragment : BaseFragment() {
             .setQuery(query, Product::class.java)
             .build()
 
-        Log.e("FirestoreProductOptions", firestoreOptions.toString())
         val firestoreRecyclerAdapter = object : FirestoreRecyclerAdapter<Product, ProductHolder>(firestoreOptions) {
             override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ProductHolder {
                 return ProductHolder(
@@ -104,10 +105,10 @@ class ProductFragment : BaseFragment() {
                     product_cost
                 ).forEach {
                     it.setOnClickListener {
-                        Log.e("Product clicked", product.name + " " + product.store["name"])
+                        logDebug(product.name + " " + product.store["name"])
                         (activity as MainActivity).let{
                             val intent = Intent (it, ProductActivity::class.java)
-                            Log.e("Intent", intent.toString())
+                            logError(Error(intent.toString()))
                             it.startActivity(intent)
                         }
                     }

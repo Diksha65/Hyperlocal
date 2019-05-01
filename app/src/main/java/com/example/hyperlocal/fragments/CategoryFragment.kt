@@ -1,6 +1,7 @@
 package com.example.hyperlocal.fragments
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -11,7 +12,6 @@ import com.example.hyperlocal.BaseFragment
 import com.example.hyperlocal.extensions.categoryCollection
 import com.example.hyperlocal.model.Category
 import com.example.hyperlocal.R
-import com.example.hyperlocal.extensions.replaceFragment
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.Query
@@ -57,8 +57,8 @@ class CategoryFragment : BaseFragment() {
 
                 arrayOf(category_image, category_name).forEach {
                     it.setOnClickListener {
-                        Log.e("Griditem", category.name)
-                        base.replaceFragment(
+                        logDebug(category.name)
+                        replaceFragment(
                             R.id.fragment_container,
                             SubCategoryFragment.newInstance(category.name)
                         )

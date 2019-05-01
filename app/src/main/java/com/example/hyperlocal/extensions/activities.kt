@@ -11,21 +11,29 @@ import java.lang.Exception
 
 /**
  * Display information
- */
-fun AppCompatActivity.snackbar(message : String) {
-    Snackbar.make(this.findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT).show()
+ *//*
+
+fun AppCompatActivity.snackbar(message : String) {  snackbar(this.findViewById(android.R.id.content), message) }
+
+fun AppCompatActivity.toast(message: String) { toast(this, message) }
+
+fun AppCompatActivity.logError(error : Throwable){ logError(tag(), error) }
+fun AppCompatActivity.logDebug(message : String?) { logDebug(tag(), message) }
+
+*/
+/**
+ * Set Name in Action Bar
+ *//*
+
+fun AppCompatActivity.setActionBarTitle(name : String) {
+    supportActionBar?.title = name
 }
 
-fun AppCompatActivity.toast(message: String) {
-    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-}
-
-fun AppCompatActivity.logError(error : Throwable){ logError(getTag(), error) }
-fun AppCompatActivity.logDebug(message : String?) { logDebug(getTag(), message) }
-
+*/
 /**
  * Switch between activities
- */
+ *//*
+
 fun AppCompatActivity.finishAndStart(activity : Class<*>) {
     startActivity(Intent(this, activity))
     finish()
@@ -35,15 +43,17 @@ fun AppCompatActivity.getSimpleName() : String {
     return this.javaClass.simpleName
 }
 
-fun AppCompatActivity.getTag() : String {
+fun AppCompatActivity.tag() : String {
     val length = this.getSimpleName().length
     val till = Math.min(length - 1, 20)
     return this.getSimpleName().substring(0..till)
 }
 
+*/
 /**
  * Open a fragment from an activity
- */
+ *//*
+
 fun AppCompatActivity.replaceFragment(containerID : Int, fragment : Fragment) {
     supportFragmentManager.beginTransaction()
         .replace(containerID, fragment)
@@ -54,4 +64,4 @@ fun AppCompatActivity.addFragment(containerID: Int, fragment : Fragment) {
     supportFragmentManager.beginTransaction()
         .add(containerID, fragment)
         .commit()
-}
+}*/

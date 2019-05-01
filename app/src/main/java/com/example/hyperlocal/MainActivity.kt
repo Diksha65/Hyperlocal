@@ -6,12 +6,14 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.*
-import com.example.hyperlocal.extensions.replaceFragment
+import com.example.hyperlocal.extensions.Firebase.auth
+import com.example.hyperlocal.extensions.snackbar
 import com.example.hyperlocal.fragments.CategoryFragment
+import com.example.hyperlocal.navigationactivity.AddCategoryActivity
 import kotlinx.android.synthetic.main.activity_navigation_drawer.*
 import kotlinx.android.synthetic.main.app_bar_navigation_drawer.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +29,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
 
-        replaceFragment(R.id.fragment_container, CategoryFragment())
+        addFragment(R.id.fragment_container, CategoryFragment())
     }
 
     override fun onBackPressed() {
@@ -55,17 +57,41 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item cliks here.
+        // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_location -> {
-                // Handle the camera action
+            R.id.nav_permission -> {
+
             }
+
+            R.id.nav_category -> {
+                if(auth.currentUser?.email == "dikshaagarwal74@gmail.com") {
+                    snackbar("Opening NewCategory Fragment")
+                    finishAndStart(AddCategoryActivity::class.java)
+                } else {
+                    snackbar("You are not allowed to add categories to the database")
+                }
+            }
+
+            R.id.nav_subcategory -> {
+
+            }
+
+            R.id.nav_product -> {
+
+            }
+
+            R.id.nav_store -> {
+
+            }
+
             R.id.nav_logout -> {
 
             }
+
             R.id.nav_share -> {
 
             }
+
             R.id.nav_rate -> {
 
             }

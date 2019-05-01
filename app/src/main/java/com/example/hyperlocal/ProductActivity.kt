@@ -1,16 +1,13 @@
 package com.example.hyperlocal
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
 
-class ProductActivity : AppCompatActivity() {
+class ProductActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product)
 
-        Toast.makeText(this,"Inside the final activity", Toast.LENGTH_SHORT).show()
+        toast("Inside the final activity")
     }
 }
