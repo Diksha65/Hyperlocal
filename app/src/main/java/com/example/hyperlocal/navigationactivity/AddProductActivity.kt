@@ -1,23 +1,21 @@
 package com.example.hyperlocal.navigationactivity
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import com.example.hyperlocal.BaseActivity
 import com.example.hyperlocal.MainActivity
 import com.example.hyperlocal.R
-import kotlinx.android.synthetic.main.sample.*
 
-class AddSubCategoryActivity : BaseActivity() {
+class AddProductActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_subcategory)
+        setContentView(R.layout.activity_add_product)
 
         assert(supportActionBar != null)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "New Category"
+        supportActionBar!!.title = "New Product"
 
-        toast("Adding Sub Category")
+        toast("Adding Product")
     }
 
     override fun onSupportNavigateUp(): Boolean {

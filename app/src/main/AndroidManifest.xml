@@ -40,13 +40,20 @@
         <activity android:name=".ProductActivity"
                   android:screenOrientation="portrait"/>
 
+        <activity android:name=".navigationactivity.ManagePermissionActivity"
+                  android:screenOrientation="portrait"/>
+
         <activity android:name=".navigationactivity.AddCategoryActivity"
-                  android:screenOrientation="portrait"
-                  android:parentActivityName=".MainActivity">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.example.hyperlocal.MainActivity"/>
-        </activity>
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".navigationactivity.AddSubCategoryActivity"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".navigationactivity.AddProductActivity"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".navigationactivity.AddStoreActivity"
+                  android:screenOrientation="portrait"/>
 
     </application>
 

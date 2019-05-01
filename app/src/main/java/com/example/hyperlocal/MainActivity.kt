@@ -1,5 +1,6 @@
 package com.example.hyperlocal
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -9,7 +10,7 @@ import android.view.*
 import com.example.hyperlocal.extensions.Firebase.auth
 import com.example.hyperlocal.extensions.snackbar
 import com.example.hyperlocal.fragments.CategoryFragment
-import com.example.hyperlocal.navigationactivity.AddCategoryActivity
+import com.example.hyperlocal.navigationactivity.*
 import kotlinx.android.synthetic.main.activity_navigation_drawer.*
 import kotlinx.android.synthetic.main.app_bar_navigation_drawer.*
 
@@ -60,28 +61,23 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_permission -> {
-
+                finishAndStart(ManagePermissionActivity::class.java)
             }
 
             R.id.nav_category -> {
-                if(auth.currentUser?.email == "dikshaagarwal74@gmail.com") {
-                    snackbar("Opening NewCategory Fragment")
-                    finishAndStart(AddCategoryActivity::class.java)
-                } else {
-                    snackbar("You are not allowed to add categories to the database")
-                }
+                openNavigationActivity(AddCategoryActivity())
             }
 
             R.id.nav_subcategory -> {
-
+                openNavigationActivity(AddSubCategoryActivity())
             }
 
             R.id.nav_product -> {
-
+                openNavigationActivity(AddProductActivity())
             }
 
             R.id.nav_store -> {
-
+                openNavigationActivity(AddStoreActivity())
             }
 
             R.id.nav_logout -> {
@@ -99,5 +95,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun openNavigationActivity(activity : Activity) {
+        if(auth.currentUser?.email == "dikshaagarwal74@gmail.com") {
+            snackbar("Opening Navigation Activity")
+            finishAndStart(activity::class.java)
+        } else {
+            snackbar("You are not allowed to add categories to the database")
+        }
     }
 }

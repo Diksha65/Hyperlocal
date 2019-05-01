@@ -1,23 +1,21 @@
 package com.example.hyperlocal.navigationactivity
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import com.example.hyperlocal.BaseActivity
 import com.example.hyperlocal.MainActivity
 import com.example.hyperlocal.R
-import kotlinx.android.synthetic.main.sample.*
 
-class AddSubCategoryActivity : BaseActivity() {
+class ManagePermissionActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_subcategory)
+        setContentView(R.layout.activity_manage_permission)
 
         assert(supportActionBar != null)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "New Category"
+        supportActionBar!!.title = "Manage Permission"
 
-        toast("Adding Sub Category")
+        toast("Manage Location Permission")
     }
 
     override fun onSupportNavigateUp(): Boolean {
