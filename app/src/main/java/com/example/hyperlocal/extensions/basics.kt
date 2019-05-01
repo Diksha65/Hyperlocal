@@ -14,7 +14,7 @@ import com.crashlytics.android.Crashlytics
 fun logError(error : Throwable) { logError("GlobalLog", error) }
 fun logError(tag : String, exception: Throwable) {
     exception.printStackTrace()
-    val text = exception.message ?: "NullErrorMessage"
+    val text = exception.message ?: "NullMessage"
     Log.e(tag, text)
     //Crashlytics.log(Log.ERROR, "F.$tag", text)
 }

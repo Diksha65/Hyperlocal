@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:layout_width="match_parent"
                                              android:layout_height="match_parent">
 
     <TextView
-            android:text="New SubCategory"
+            android:text="@string/new_subcategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/new_subcategory_header"
@@ -22,7 +23,7 @@
             android:fontFamily="sans-serif-black"
             android:textAllCaps="true"/>
     <TextView
-            android:text="SubCategory Name"
+            android:text="@string/subcategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/subcategory_name"
@@ -40,10 +41,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine|textPersonName|textAutoComplete"
-            android:text="Name"
             android:ems="10"
             android:id="@+id/subcategory_name_value"
-            android:hint="SubCategoey Name"
+            android:hint="@string/subcategory_name_hint"
             app:layout_constraintTop_toBottomOf="@+id/subcategory_name"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +55,7 @@
             app:layout_constraintHorizontal_bias="0.148"/>
 
     <TextView
-            android:text="Category Type"
+            android:text="@string/category_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/category_type"
@@ -81,7 +81,7 @@
     </Spinner>
 
     <TextView
-            android:text="SubCategory Image"
+            android:text="@string/subcategory_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/subcategory_image" app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +99,7 @@
             app:layout_constraintHorizontal_bias="0.11" android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/subcategory_image"/>
     <Button
-            android:text="Upload"
+            android:text="@string/upload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/upload_button" android:layout_marginTop="8dp"
@@ -108,7 +108,7 @@
             android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
             app:layout_constraintHorizontal_bias="0.087"/>
     <Button
-            android:text="Done"
+            android:text="@string/done"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/add_subcategory_button" app:layout_constraintStart_toStartOf="parent"

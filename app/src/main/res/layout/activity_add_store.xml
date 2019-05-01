@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:layout_width="match_parent"
                                              android:layout_height="match_parent">
 
     <TextView
-            android:text="New Store"
+            android:text="@string/new_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/new_store_header" android:layout_marginTop="28dp"
@@ -14,7 +15,7 @@
             android:textAllCaps="true" android:textSize="30sp" android:typeface="sans"
             android:fontFamily="sans-serif-black"/>
     <Button
-            android:text="Done"
+            android:text="@string/done"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/add_store" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
@@ -26,7 +27,7 @@
             android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/store_phoneno_value"
             app:layout_constraintVertical_bias="0.945"/>
     <TextView
-            android:text="Store Name"
+            android:text="@string/store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/store_name" android:layout_marginTop="16dp"
@@ -38,15 +39,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine|textPersonName|textAutoComplete"
-            android:text="Name"
             android:ems="10"
             android:id="@+id/store_name_value" android:layout_marginTop="12dp"
             app:layout_constraintTop_toBottomOf="@+id/store_name" android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp" android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
-            app:layout_constraintHorizontal_bias="0.093" android:hint="Store Name"/>
+            app:layout_constraintHorizontal_bias="0.093" android:hint="@string/store_name_hint"/>
     <TextView
-            android:text="Store Address"
+            android:text="@string/store_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/store_address" android:layout_marginTop="12dp"
@@ -58,15 +58,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine|textPersonName"
-            android:text="Name"
             android:ems="10"
             android:id="@+id/store_address_value" android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/store_address" android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp" android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
-            app:layout_constraintHorizontal_bias="0.093" android:hint="Store Address as in Maps"/>
+            app:layout_constraintHorizontal_bias="0.093" android:hint="@string/address_hint"/>
     <TextView
-            android:text="Store Phone No"
+            android:text="@string/store_phoneno"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/store_phoneno" android:layout_marginTop="16dp"
@@ -83,5 +82,5 @@
             app:layout_constraintTop_toBottomOf="@+id/store_phoneno" android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp" android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
-            app:layout_constraintHorizontal_bias="0.093" android:hint="999-999-9999"/>
+            app:layout_constraintHorizontal_bias="0.093" android:hint="@string/phoneno_hint"/>
 </android.support.constraint.ConstraintLayout>

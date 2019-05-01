@@ -2,14 +2,13 @@
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/navigation_container">
 
     <TextView
-            android:text="New Category"
+            android:text="@string/new_category"
             android:textSize="30sp"
             android:textAlignment="center"
             android:textAllCaps="true"
@@ -29,7 +28,7 @@
             android:fontFamily="sans-serif-black" />
 
     <TextView
-            android:text="Catgegory Name"
+            android:text="@string/category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/category_name"
@@ -47,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine|textPersonName|textAutoComplete"
-            android:hint="Name"
+            android:hint="@string/name_hint"
             android:ems="10"
             android:id="@+id/category_name_value"
             app:layout_constraintTop_toBottomOf="@+id/category_name"
@@ -61,7 +60,7 @@
             android:layout_marginTop="12dp"/>
 
     <TextView
-            android:text="Category Image"
+            android:text="@string/category_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/category_image"
@@ -91,7 +90,7 @@
             android:layout_marginRight="8dp"
             app:layout_constraintHorizontal_bias="0.142"/>
     <Button
-            android:text="Upload"
+            android:text="@string/upload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/upload_image"
@@ -106,7 +105,7 @@
             android:layout_marginTop="12dp"/>
 
     <Button
-            android:text="Done"
+            android:text="@string/done"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/add_category_button"

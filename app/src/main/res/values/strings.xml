@@ -16,4 +16,54 @@
     <string name="Books">Books</string>
     <string name="Electronics">Electronics</string>
 
+    <!-->Add Category Activity<-->
+    <string name="new_category">New Category</string>
+    <string name="category">Category</string>
+    <string name="name_hint">Accessories</string>
+    <string name="category_image">Category Image</string>
+
+    <!-->Add SubCategory Activity<-->
+    <string name="new_subcategory">New SubCategory</string>
+    <string name="subcategory">Sub Category</string>
+    <string name="subcategory_name_hint">Subcategory Name</string>
+    <string name="subcategory_image">SubCategory Image</string>\
+    <string name="category_type">Category Type</string>
+
+    <!-->Add Product Activity<-->
+    <string name="new_product">New Product</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_name_hint">Motorola G5 Plus 32 GB Black</string>
+    <string name="product_cost">Product Cost</string>
+    <string name="cost_hint">00.00</string>
+    <string name="product_image">Product Image</string>
+
+    <!-->Add Store Activity<-->
+    <string name="new_store">New Store</string>
+    <string name="store">Store</string>
+    <string name="store_name_hint">Name</string>
+    <string name="store_address">Store Address</string>
+    <string name="store_phoneno">Store PhoneNo</string>
+    <string name="phoneno_hint">999-999-9999</string>
+    <string name="address_hint">Store Address as in Maps</string>
+
+    <!-->Manage Permission Activity<-->
+    <string name="location_permission">Location Permission</string>
+
+    <!-->Common<-->
+    <string name="upload">Upload</string>
+    <string name="done">Done</string>
+
+    <!-->Product /Activity<-->
+    <string name="hyperlocal_product">Hyperlocal Product</string>
+    <string name="hyperlocal_store">Hyperlocal Store</string>
+    <string name="hyperlocal_address">Brookfield, Bangalore, India</string>
+    <string name="hyperlocal_cost">0.0</string>
+    <string name="hyperlocal_distance">2km</string>
+
+    <string name="sort_distance">Sort By Dist</string>
+    <string name="sort_price">Sort By Price</string>
+
+    <string name="cost">Cost: </string>
+
+
 </resources>

@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -12,10 +11,10 @@
             android:layout_width="match_parent" android:layout_height="match_parent">
 
         <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
-                                                     android:layout_height="match_parent">
+                                                     android:layout_height="wrap_content">
 
             <TextView
-                    android:text="Hyperlocal Product"
+                    android:hint="@string/hyperlocal_product"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/prod_name"
@@ -39,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/prod_store_name"
-                    android:text="Hyperlocal Store"
+                    android:hint="@string/hyperlocal_store"
                     android:textSize="15sp"
                     android:textStyle="normal"
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
@@ -60,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/prod_store_loc"
-                    android:text="Brookfield, Bangalore, India"
+                    android:hint="@string/hyperlocal_address"
                     app:layout_constraintStart_toEndOf="@+id/prod_store_loc_icon" android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp" android:layout_marginTop="16dp"
@@ -75,7 +74,7 @@
                     android:layout_marginStart="20dp" android:layout_marginTop="4dp"
                     app:layout_constraintTop_toBottomOf="@+id/prod_store_loc_icon"/>
             <TextView
-                    android:text="0.0"
+                    android:hint="@string/hyperlocal_cost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/prod_cost_value" app:layout_constraintStart_toEndOf="@+id/prod_cost"
@@ -94,7 +93,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/prod_cost" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginLeft="20dp" android:layout_marginStart="20dp"/>
             <TextView
-                    android:text="2km"
+                    android:hint="@string/hyperlocal_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/prod_dist_value" app:layout_constraintStart_toEndOf="@+id/prod_dist"

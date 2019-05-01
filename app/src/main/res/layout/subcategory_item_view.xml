@@ -21,7 +21,7 @@
                 android:id="@+id/subcategory_name"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:hint="Sub-Category"
+                android:hint="@string/subcategory"
                 android:textAlignment="center"
                 android:textStyle="bold"
                 android:textSize="15sp"/>
