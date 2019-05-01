@@ -2,9 +2,7 @@ package com.example.hyperlocal.intro
 
 import android.app.Activity
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.example.hyperlocal.*
 import com.example.hyperlocal.extensions.*
 import com.example.hyperlocal.extensions.Firebase.auth
@@ -14,6 +12,7 @@ import com.firebase.ui.auth.IdpResponse
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
 import com.crashlytics.android.Crashlytics
+import com.example.hyperlocal.base.BaseActivity
 import io.fabric.sdk.android.Fabric
 
 

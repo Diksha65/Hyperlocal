@@ -1,11 +1,9 @@
 package com.example.hyperlocal.navigationactivity
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import com.example.hyperlocal.BaseActivity
+import com.example.hyperlocal.base.BaseActivity
 import com.example.hyperlocal.MainActivity
 import com.example.hyperlocal.R
-import kotlinx.android.synthetic.main.sample.*
 
 class AddSubCategoryActivity : BaseActivity() {
 

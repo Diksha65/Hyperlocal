@@ -1,7 +1,7 @@
 package com.example.hyperlocal.navigationactivity
 
 import android.os.Bundle
-import com.example.hyperlocal.BaseActivity
+import com.example.hyperlocal.base.BaseActivity
 import com.example.hyperlocal.MainActivity
 import com.example.hyperlocal.R
 

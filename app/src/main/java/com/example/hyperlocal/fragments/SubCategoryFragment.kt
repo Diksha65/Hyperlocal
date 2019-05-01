@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.hyperlocal.BaseFragment
+import com.example.hyperlocal.base.BaseFragment
 import com.example.hyperlocal.extensions.subCategoryCollection
 import com.example.hyperlocal.model.SubCategory
 import com.example.hyperlocal.R

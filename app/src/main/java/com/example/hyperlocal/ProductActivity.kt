@@ -1,6 +1,7 @@
 package com.example.hyperlocal
 
 import android.os.Bundle
+import com.example.hyperlocal.base.BaseActivity
 
 class ProductActivity : BaseActivity() {
 

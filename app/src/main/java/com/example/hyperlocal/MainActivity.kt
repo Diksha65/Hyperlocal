@@ -5,10 +5,9 @@ import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
 import android.view.*
+import com.example.hyperlocal.base.BaseActivity
 import com.example.hyperlocal.extensions.Firebase.auth
-import com.example.hyperlocal.extensions.snackbar
 import com.example.hyperlocal.fragments.CategoryFragment
 import com.example.hyperlocal.navigationactivity.*
 import kotlinx.android.synthetic.main.activity_navigation_drawer.*

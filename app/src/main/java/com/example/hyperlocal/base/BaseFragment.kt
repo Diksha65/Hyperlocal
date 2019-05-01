@@ -1,4 +1,4 @@
-package com.example.hyperlocal
+package com.example.hyperlocal.base
 
 import android.R
 import android.content.Context
