@@ -9,6 +9,7 @@ import android.view.*
 import com.example.hyperlocal.base.BaseActivity
 import com.example.hyperlocal.extensions.Firebase.auth
 import com.example.hyperlocal.fragments.CategoryFragment
+import com.example.hyperlocal.intro.LoginActivity
 import com.example.hyperlocal.navigationactivity.*
 import kotlinx.android.synthetic.main.activity_navigation_drawer.*
 import kotlinx.android.synthetic.main.app_bar_navigation_drawer.*
@@ -80,7 +81,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
 
             R.id.nav_logout -> {
-
+                logDebug("${auth.currentUser!!.email} logging out")
+                auth.signOut()
+                finishAndStart(LoginActivity::class.java)
             }
 
             R.id.nav_share -> {
