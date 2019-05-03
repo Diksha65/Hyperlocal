@@ -52,7 +52,6 @@ class CategoryFragment : BaseFragment() {
             itemView.apply {
                 //Glide.with(itemView).load(category.image).into(itemView.category_image)
                 category_name.text = category.name
-
                 arrayOf(category_image, category_name).forEach {
                     it.setOnClickListener {
                         logDebug(category.name)
