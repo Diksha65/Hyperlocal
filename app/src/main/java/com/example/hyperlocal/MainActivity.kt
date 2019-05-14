@@ -1,21 +1,31 @@
 package com.example.hyperlocal
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.*
+import com.bumptech.glide.Glide
 import com.example.hyperlocal.base.BaseActivity
 import com.example.hyperlocal.extensions.Firebase.auth
 import com.example.hyperlocal.fragments.CategoryFragment
 import com.example.hyperlocal.intro.LoginActivity
+import com.example.hyperlocal.model.User
 import com.example.hyperlocal.navigationactivity.*
 import kotlinx.android.synthetic.main.activity_navigation_drawer.*
 import kotlinx.android.synthetic.main.app_bar_navigation_drawer.*
+import kotlinx.android.synthetic.main.nav_header_navigation_drawer.*
 
+@SuppressLint("ByteOrderMark")
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    private val RECORD_REQUEST_CODE = 101
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,4 +117,5 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             snackbar("You are not allowed to add categories to the database")
         }
     }
+
 }

@@ -4,9 +4,19 @@ import android.R
 import android.content.Intent
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import com.example.hyperlocal.PermissionsModule
 import com.example.hyperlocal.extensions.*
 
 abstract class BaseActivity : AppCompatActivity() {
+
+    /**
+     * Handling permissions
+     */
+    private val permissionModule = PermissionsModule()
+
+    /*fun withPermissions(vararg permissions : String) {
+        permissionModule.PermissionBuilder()
+    }*/
 
     /**
      * Display information
@@ -14,11 +24,9 @@ abstract class BaseActivity : AppCompatActivity() {
     fun snackbar(message : String) {
         snackbar(this.findViewById(R.id.content), message)
     }
-
     fun toast(message: String) {
         toast(this, message)
     }
-
     fun logError(error : Throwable){
         logError(tag(), error)
     }
@@ -40,11 +48,9 @@ abstract class BaseActivity : AppCompatActivity() {
         startActivity(Intent(this, activity))
         finish()
     }
-
     fun getSimpleName() : String {
         return this.javaClass.simpleName
     }
-
     fun tag() : String {
         val length = this.getSimpleName().length
         val till = Math.min(length - 1, 20)
@@ -59,7 +65,6 @@ abstract class BaseActivity : AppCompatActivity() {
             .replace(containerID, fragment)
             .commit()
     }
-
     fun addFragment(containerID: Int, fragment : Fragment) {
         supportFragmentManager.beginTransaction()
             .add(containerID, fragment)
