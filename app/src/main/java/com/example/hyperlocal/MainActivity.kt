@@ -20,7 +20,16 @@ import com.example.hyperlocal.model.User
 import com.example.hyperlocal.navigationactivity.*
 import kotlinx.android.synthetic.main.activity_navigation_drawer.*
 import kotlinx.android.synthetic.main.app_bar_navigation_drawer.*
+import kotlinx.android.synthetic.main.content_navigation_drawer.*
 import kotlinx.android.synthetic.main.nav_header_navigation_drawer.*
+import android.widget.Toast
+import android.app.ProgressDialog
+import android.support.v7.widget.SearchView
+import android.widget.RelativeLayout
+import android.widget.ProgressBar
+import com.example.hyperlocal.extensions.Firebase.firestore
+import com.example.hyperlocal.fragments.ProductFragment
+
 
 @SuppressLint("ByteOrderMark")
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -32,6 +41,17 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setContentView(R.layout.activity_navigation_drawer)
         setSupportActionBar(toolbar)
 
+        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchData(query)
+                return true
+            }
+        })
+
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
@@ -41,6 +61,23 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         nav_view.setNavigationItemSelectedListener(this)
 
         addFragment(R.id.fragment_container, CategoryFragment())
+    }
+
+    fun searchData(query: String?) {
+        firestore.collection("products").whereEqualTo("name", query)
+            .get()
+            .addOnSuccessListener { queryDocumentSnapshots ->
+                for (snap in queryDocumentSnapshots) {
+                    replaceFragment(
+                        R.id.fragment_container,
+                        ProductFragment.newInstance(snap["name"].toString())
+                    )
+                }
+            }
+            .addOnFailureListener {
+                toast("The item searched is currently not present in the database")
+                logError(Error("Item not found"))
+            }
     }
 
     override fun onBackPressed() {

@@ -25,15 +25,13 @@ import kotlinx.android.synthetic.main.product_recyclerview.*
 
 class ProductFragment : Fragment() {
 
-    private var categoryName : String? = null
     private var subCategoryName : String? = null
 
     companion object {
         @JvmStatic
-        fun newInstance(tagCategory: String, tagSubCategory: String) =
+        fun newInstance(tagSubCategory: String) =
             ProductFragment().apply {
                 arguments = Bundle().apply {
-                    putString("categoryName", tagCategory)
                     putString("subCategoryName", tagSubCategory)
                 }
             }
@@ -41,7 +39,6 @@ class ProductFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        categoryName = arguments?.getString("categoryName")
         subCategoryName = arguments?.getString("subCategoryName")
     }
 

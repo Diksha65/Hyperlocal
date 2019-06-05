@@ -75,7 +75,7 @@ class SubCategoryFragment : BaseFragment() {
                     logDebug(subCategory.category["name"])
                     replaceFragment(
                         R.id.fragment_container,
-                        ProductFragment.newInstance(categoryName!!, subCategory.name)
+                        ProductFragment.newInstance(subCategory.name)
                     )
                 }
             }
