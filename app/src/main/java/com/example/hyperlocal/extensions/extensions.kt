@@ -1,4 +1,4 @@
-package com.example.hyperlocal
+package com.example.hyperlocal.extensions
 
 import android.text.Editable
 import android.text.TextWatcher

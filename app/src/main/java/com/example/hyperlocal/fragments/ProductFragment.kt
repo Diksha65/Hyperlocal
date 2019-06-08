@@ -1,29 +1,28 @@
 package com.example.hyperlocal.fragments
 
+import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.hyperlocal.extensions.productCollection
 import com.example.hyperlocal.MainActivity
 import com.example.hyperlocal.model.Product
 import com.example.hyperlocal.ProductActivity
 import com.example.hyperlocal.R
-import com.example.hyperlocal.extensions.logDebug
-import com.example.hyperlocal.extensions.logError
+import com.example.hyperlocal.base.BaseFragment
+import com.example.hyperlocal.extensions.*
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.product_item_view.view.*
 import kotlinx.android.synthetic.main.product_recyclerview.*
 
-class ProductFragment : Fragment() {
+class ProductFragment : BaseFragment() {
 
     private var subCategoryName : String? = null
 
@@ -49,6 +48,13 @@ class ProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Toast.makeText(context, subCategoryName, Toast.LENGTH_SHORT).show()
+
+        sort_by_distance.setOnClickListener {
+            if(isPermissionGranted(base, Manifest.permission.ACCESS_FINE_LOCATION))
+                toast("Permission there")
+            else
+                toast("Permission not there")
+        }
 
         setupFirestoreRecyclerView(productCollection
             .whereEqualTo("subcategory.name", subCategoryName))
