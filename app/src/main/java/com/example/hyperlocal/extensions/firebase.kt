@@ -18,13 +18,17 @@ import java.nio.file.Files.getOwner
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import android.arch.lifecycle.LifecycleObserver
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.hyperlocal.R
+import com.example.hyperlocal.extensions.Firebase.storage
 import com.firebase.ui.firestore.ChangeEventListener
 import com.firebase.ui.firestore.FirestoreArray
 import com.google.firebase.firestore.Query
+import com.google.firebase.storage.UploadTask
+import java.io.File
 
 
 object Firebase {
@@ -50,6 +54,15 @@ val categoryCollection      = Firebase.firestore.collection("category")
 val subCategoryCollection   = Firebase.firestore.collection("subcateogry")
 val productCollection       = Firebase.firestore.collection("products")
 val storesCollection        = Firebase.firestore.collection("stores")
+
+/**
+ * Upload image to firebase storage
+ */
+fun uploadImage(selectedImage : File) : UploadTask {
+    val file = Uri.fromFile(selectedImage)
+    return storage.child("category/${file.lastPathSegment}").putFile(file)
+}
+
 
 /**
  * FirebaseRecyclerAdapter

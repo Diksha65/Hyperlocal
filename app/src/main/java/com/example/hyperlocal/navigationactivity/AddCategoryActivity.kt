@@ -9,11 +9,8 @@ import com.bumptech.glide.Glide
 import com.example.hyperlocal.MainActivity
 import com.example.hyperlocal.R
 import com.example.hyperlocal.base.BaseActivity
+import com.example.hyperlocal.extensions.*
 import com.example.hyperlocal.extensions.Firebase.storage
-import com.example.hyperlocal.extensions.categoryCollection
-import com.example.hyperlocal.extensions.isPermissionGranted
-import com.example.hyperlocal.extensions.onChange
-import com.example.hyperlocal.extensions.requestSinglePermission
 import com.example.hyperlocal.model.Category
 import kotlinx.android.synthetic.main.activity_add_category.*
 import pl.aprilapps.easyphotopicker.DefaultCallback
@@ -38,13 +35,7 @@ class AddCategoryActivity : BaseActivity() {
         category.ID = UUID.randomUUID().toString()
         category_name_value.onChange { text -> category.name = text }
 
-        upload_image.setOnClickListener {
-            if(!isPermissionGranted(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                requestSinglePermission(this, this, Manifest.permission.READ_EXTERNAL_STORAGE)
-            } else {
-                EasyImage.openGallery(this, 0)
-            }
-        }
+        upload_image.setOnClickListener { openGallery(this, this) }
 
         add_category_button.setOnClickListener {
             if(TextUtils.isEmpty(category_name_value.text)) {
@@ -56,19 +47,14 @@ class AddCategoryActivity : BaseActivity() {
     }
 
     private fun uploadToFirebase() {
-        val file = Uri.fromFile(selectedImage)
-        category.image = file.lastPathSegment
-
-        storage.child("category/${category.image}")
-            .putFile(file)
+        uploadImage(selectedImage)
             .addOnSuccessListener {
-                toast("Image successfully uploaded")
+                category.image = Uri.fromFile(selectedImage).lastPathSegment
+
                 categoryCollection.document(category.ID)
                     .set(category)
                     .addOnSuccessListener {
-                        toast("Data successfully uploaded to cloud")
-                        /**
-                         * TODO
+                        /**TODO
                          *    :show progress dialog here
                          */
                         onBackPressed()
@@ -78,19 +64,8 @@ class AddCategoryActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-        EasyImage.handleActivityResult(requestCode, resultCode, data, this, object : DefaultCallback() {
-            override fun onImagePickerError(e: Exception?, source: EasyImage.ImageSource?, type: Int) {
-                //Some error handling
-            }
-
-            override fun onImagesPicked(imagesFiles: List<File>, source: EasyImage.ImageSource, type: Int) {
-                //Handle the images
-                if(imagesFiles.size == 1)
-                    selectedImage = imagesFiles[0]
-                Glide.with(this@AddCategoryActivity).load(selectedImage).into(category_image_value)
-            }
-        })
+        selectedImage = galleryResult(requestCode, resultCode, data)
+        displayImage(selectedImage, category_image_value)
     }
 
     override fun onSupportNavigateUp(): Boolean {

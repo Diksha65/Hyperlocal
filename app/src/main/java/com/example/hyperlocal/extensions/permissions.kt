@@ -1,5 +1,6 @@
 package com.example.hyperlocal.extensions
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -13,6 +14,7 @@ import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.*
 import com.karumi.dexter.listener.single.PermissionListener
+import pl.aprilapps.easyphotopicker.EasyImage
 
 fun isPermissionGranted(context : Context, permission : String) : Boolean {
     return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
@@ -58,4 +60,12 @@ fun openSettings(context : Context, activity : Activity) {
     val uri = Uri.fromParts("package", context.packageName, null)
     intent.data = uri
     startActivityForResult(activity, intent, 101, null)
+}
+
+fun openGallery(context: Context, activity: Activity) {
+    if(!isPermissionGranted(context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+        requestSinglePermission(context, activity, Manifest.permission.READ_EXTERNAL_STORAGE)
+    } else {
+        EasyImage.openGallery(activity, 0)
+    }
 }

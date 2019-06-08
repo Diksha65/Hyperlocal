@@ -53,11 +53,7 @@ class AddSubCategoryActivity : BaseActivity() {
         }
 
         upload_button.setOnClickListener {
-            if(!isPermissionGranted(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                requestSinglePermission(this, this, Manifest.permission.READ_EXTERNAL_STORAGE)
-            } else {
-                EasyImage.openGallery(this, 0)
-            }
+            openGallery(this, this)
         }
 
         add_subcategory_button.setOnClickListener {
@@ -73,19 +69,14 @@ class AddSubCategoryActivity : BaseActivity() {
     }
 
     private fun uploadToFirebase() {
-        val file = Uri.fromFile(selectedImage)
-        subcategory.image = file.lastPathSegment
-
-        storage.child("category/${subcategory.image}")
-            .putFile(file)
+        uploadImage(selectedImage)
             .addOnSuccessListener {
-                toast("Image successfully uploaded")
+                subcategory.image = Uri.fromFile(selectedImage).lastPathSegment
+
                 subCategoryCollection.document(subcategory.ID)
                     .set(subcategory)
                     .addOnSuccessListener {
-                        toast("Data successfully uploaded to cloud")
-                        /**
-                         * TODO
+                        /**TODO
                          *    :show progress dialog here
                          */
                         onBackPressed()
@@ -95,19 +86,8 @@ class AddSubCategoryActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-        EasyImage.handleActivityResult(requestCode, resultCode, data, this, object : DefaultCallback() {
-            override fun onImagePickerError(e: Exception?, source: EasyImage.ImageSource?, type: Int) {
-                //Some error handling
-            }
-
-            override fun onImagesPicked(imagesFiles: List<File>, source: EasyImage.ImageSource, type: Int) {
-                //Handle the images
-                if(imagesFiles.size == 1)
-                    selectedImage = imagesFiles[0]
-                Glide.with(this@AddSubCategoryActivity).load(selectedImage).into(subcategory_image_value)
-            }
-        })
+        selectedImage = galleryResult(requestCode, resultCode, data)
+        displayImage(selectedImage, subcategory_image_value)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -122,9 +102,7 @@ class AddSubCategoryActivity : BaseActivity() {
 
     fun setUpSpinner(spinner : Spinner, onItemSelected : (String) -> Unit) {
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
+        val adapter = spinner.setAdapter(this, categories)
 
         categoryCollection
             .get()
@@ -137,14 +115,6 @@ class AddSubCategoryActivity : BaseActivity() {
                     adapter.notifyDataSetChanged()
                 }
             }
-
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                logDebug("Nothing Selected")
-            }
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                onItemSelected(parent?.getItemAtPosition(position) as String)
-            }
-        }
+        spinner.selectSpinnerElement(onItemSelected)
     }
 }
