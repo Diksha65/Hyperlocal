@@ -43,7 +43,7 @@ abstract class BaseActivity : AppCompatActivity() {
     }
     fun tag() : String {
         val length = this.getSimpleName().length
-        val till = Math.min(length - 1, 20)
+        val till = Math.min(length - 1, 25)
         return this.getSimpleName().substring(0..till)
     }
 

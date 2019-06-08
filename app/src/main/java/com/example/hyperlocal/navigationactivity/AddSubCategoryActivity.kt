@@ -5,26 +5,30 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import com.bumptech.glide.Glide
 import com.example.hyperlocal.base.BaseActivity
 import com.example.hyperlocal.MainActivity
 import com.example.hyperlocal.R
 import com.example.hyperlocal.extensions.Firebase.storage
-import com.example.hyperlocal.extensions.isPermissionGranted
-import com.example.hyperlocal.extensions.onChange
-import com.example.hyperlocal.extensions.requestSinglePermission
-import com.example.hyperlocal.extensions.subCategoryCollection
 import com.example.hyperlocal.model.SubCategory
 import kotlinx.android.synthetic.main.activity_add_subcategory.*
 import pl.aprilapps.easyphotopicker.DefaultCallback
 import pl.aprilapps.easyphotopicker.EasyImage
 import java.io.File
 import java.util.*
+import android.view.View
+import android.widget.AdapterView
+import com.example.hyperlocal.extensions.*
+import kotlin.collections.HashMap
 
 class AddSubCategoryActivity : BaseActivity() {
 
     private lateinit var selectedImage : File
     private var subcategory = SubCategory()
+    private var listOfCategoryMap : HashMap<String, String> = HashMap()
+    private val categories = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +40,17 @@ class AddSubCategoryActivity : BaseActivity() {
 
         subcategory.ID = UUID.randomUUID().toString()
         subcategory_name_value.onChange { text -> subcategory.name = text }
+
+        setUpSpinner(category_type_value) { selected ->
+
+            subcategory.category["name"] = selected
+            for(items in listOfCategoryMap) {
+                if(items.value == selected) {
+                    subcategory.category["id"] = items.key
+                    break
+                }
+            }
+        }
 
         upload_button.setOnClickListener {
             if(!isPermissionGranted(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
@@ -51,6 +66,9 @@ class AddSubCategoryActivity : BaseActivity() {
             } else {
                 uploadToFirebase()
             }
+            logDebug("Checkingg",
+                "${subcategory.ID}, ${subcategory.name}, ${subcategory.image}, ${subcategory.category}")
+
         }
     }
 
@@ -100,5 +118,33 @@ class AddSubCategoryActivity : BaseActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finishAndStart(MainActivity::class.java)
+    }
+
+    fun setUpSpinner(spinner : Spinner, onItemSelected : (String) -> Unit) {
+
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+
+        categoryCollection
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        listOfCategoryMap[document["id"].toString()] = document["name"].toString()
+                        categories.add(document["name"].toString())
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+            }
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                logDebug("Nothing Selected")
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                onItemSelected(parent?.getItemAtPosition(position) as String)
+            }
+        }
     }
 }
