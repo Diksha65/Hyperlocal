@@ -1,25 +1,17 @@
 package com.example.hyperlocal.navigationactivity
 
-import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
-import android.widget.ArrayAdapter
 import android.widget.Spinner
-import com.bumptech.glide.Glide
 import com.example.hyperlocal.base.BaseActivity
 import com.example.hyperlocal.MainActivity
 import com.example.hyperlocal.R
-import com.example.hyperlocal.extensions.Firebase.storage
 import com.example.hyperlocal.model.SubCategory
 import kotlinx.android.synthetic.main.activity_add_subcategory.*
-import pl.aprilapps.easyphotopicker.DefaultCallback
-import pl.aprilapps.easyphotopicker.EasyImage
 import java.io.File
 import java.util.*
-import android.view.View
-import android.widget.AdapterView
 import com.example.hyperlocal.extensions.*
 import kotlin.collections.HashMap
 
@@ -58,13 +50,10 @@ class AddSubCategoryActivity : BaseActivity() {
 
         add_subcategory_button.setOnClickListener {
             if(TextUtils.isEmpty(subcategory_name_value.text)) {
-                subcategory_name_value.error = "Category name is required"
+                subcategory_name_value.error = "SubCategory name is required"
             } else {
                 uploadToFirebase()
             }
-            logDebug("Checkingg",
-                "${subcategory.ID}, ${subcategory.name}, ${subcategory.image}, ${subcategory.category}")
-
         }
     }
 

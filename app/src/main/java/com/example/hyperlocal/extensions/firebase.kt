@@ -53,7 +53,7 @@ val usersCollection         = Firebase.firestore.collection("users")
 val categoryCollection      = Firebase.firestore.collection("category")
 val subCategoryCollection   = Firebase.firestore.collection("subcateogry")
 val productCollection       = Firebase.firestore.collection("products")
-val storesCollection        = Firebase.firestore.collection("stores")
+val storeCollection        = Firebase.firestore.collection("stores")
 
 /**
  * Upload image to firebase storage
