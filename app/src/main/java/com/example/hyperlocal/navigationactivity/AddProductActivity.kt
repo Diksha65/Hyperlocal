@@ -36,8 +36,6 @@ class AddProductActivity : BaseActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = "New Product"
 
-        subcategory_type_value.isEnabled = false
-
         product.ID = UUID.randomUUID().toString()
         product_name_value.onChange { text -> product.name = text }
         product_cost_value.onChange { text -> product.store["cost"] = text}
@@ -87,7 +85,7 @@ class AddProductActivity : BaseActivity() {
     }
 
     private fun uploadToFirebase() {
-        uploadImage(selectedImage)
+        uploadImage(selectedImage, "product")
             .addOnSuccessListener {
                 product.image = Uri.fromFile(selectedImage).lastPathSegment
 
@@ -140,9 +138,8 @@ class AddProductActivity : BaseActivity() {
     }
 
     fun setUpSubCategorySpinner(spinner : Spinner, onItemSelected : (String) -> Unit) {
-
         val adapter = spinner.setAdapter(this, subcategories)
-        subCategoryCollection.whereEqualTo("category.id", product.category["id"])
+        subCategoryCollection
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -163,8 +160,8 @@ class AddProductActivity : BaseActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     for (document in task.result!!) {
-                        listOfCategoryMap[document["id"].toString()] = document["name"].toString()
-                        categories.add(document["name"].toString())
+                        listOfStoreMap[document["id"].toString()] = document["name"].toString()
+                        stores.add(document["name"].toString())
                     }
                     adapter.notifyDataSetChanged()
                 }

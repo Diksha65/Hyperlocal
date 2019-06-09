@@ -58,9 +58,9 @@ val storeCollection        = Firebase.firestore.collection("stores")
 /**
  * Upload image to firebase storage
  */
-fun uploadImage(selectedImage : File) : UploadTask {
+fun uploadImage(selectedImage : File, pathname : String) : UploadTask {
     val file = Uri.fromFile(selectedImage)
-    return storage.child("category/${file.lastPathSegment}").putFile(file)
+    return storage.child("$pathname/${file.lastPathSegment}").putFile(file)
 }
 
 

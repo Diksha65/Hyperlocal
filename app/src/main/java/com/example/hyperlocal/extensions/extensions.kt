@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.*
 import com.bumptech.glide.Glide
 import com.example.hyperlocal.base.BaseActivity
+import com.example.hyperlocal.extensions.Firebase.storage
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirestoreRegistrar
@@ -52,6 +53,7 @@ fun BaseActivity.galleryResult(requestCode: Int, resultCode: Int, data: Intent?)
 fun BaseActivity.displayImage(imageFile : File, imageView : ImageView) {
     Glide.with(this).load(imageFile).into(imageView)
 }
+
 
 fun Spinner.selectSpinnerElement(onItemSelected : (String) -> Unit) {
 

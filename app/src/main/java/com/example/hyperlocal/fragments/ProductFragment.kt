@@ -56,6 +56,14 @@ class ProductFragment : BaseFragment() {
                 toast("Permission not there")
         }
 
+        sort_by_price.setOnClickListener {
+            /*
+            val firestoreQuery = firestore
+            .collection("posts")
+            .orderBy("date", Query.Direction.DESCENDING)
+             */
+        }
+
         setupFirestoreRecyclerView(productCollection
             .whereEqualTo("subcategory.name", subCategoryName))
     }

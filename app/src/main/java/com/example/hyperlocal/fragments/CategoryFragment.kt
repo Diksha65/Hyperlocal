@@ -6,10 +6,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.example.hyperlocal.base.BaseFragment
 import com.example.hyperlocal.extensions.categoryCollection
 import com.example.hyperlocal.model.Category
 import com.example.hyperlocal.R
+import com.example.hyperlocal.extensions.Firebase.storage
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.Query
@@ -25,6 +27,7 @@ class CategoryFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupFirestoreRecyclerView(categoryCollection)
+
     }
 
     private fun setupFirestoreRecyclerView (query: Query) {
@@ -43,21 +46,25 @@ class CategoryFragment : BaseFragment() {
                 holder.bindItems(model)
             }
         }
-        productCategoryRecyclerView.layoutManager = GridLayoutManager(context, 2)
+        productCategoryRecyclerView.layoutManager = GridLayoutManager(context, 2, 1, false)
         productCategoryRecyclerView.adapter = firestoreRecyclerAdapter
     }
 
     inner class CategoryHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         fun bindItems(category : Category) {
             itemView.apply {
-                //Glide.with(itemView).load(category.image).into(itemView.category_image)
                 category_name.text = category.name
+                logDebug("${category.image}")
+
+                Glide.with(this@CategoryFragment)
+                    .load(storage.child("category/${category.image}"))
+                    .into(itemView.category_image)
+
                 arrayOf(category_image, category_name).forEach {
                     it.setOnClickListener {
-                        logDebug(category.name)
                         replaceFragment(
                             R.id.fragment_container,
-                            SubCategoryFragment.newInstance(category.name)
+                            SubCategoryFragment.newInstance(category.ID)
                         )
                     }
                 }

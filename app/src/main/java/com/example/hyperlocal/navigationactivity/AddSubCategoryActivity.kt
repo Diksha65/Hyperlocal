@@ -58,7 +58,7 @@ class AddSubCategoryActivity : BaseActivity() {
     }
 
     private fun uploadToFirebase() {
-        uploadImage(selectedImage)
+        uploadImage(selectedImage, "subcategory")
             .addOnSuccessListener {
                 subcategory.image = Uri.fromFile(selectedImage).lastPathSegment
 
