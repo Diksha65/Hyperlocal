@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.hyperlocal.MainActivity
 import com.example.hyperlocal.model.Product
 import com.example.hyperlocal.ProductActivity
@@ -24,21 +24,19 @@ import kotlinx.android.synthetic.main.product_recyclerview.*
 
 class ProductFragment : BaseFragment() {
 
-    private var subCategoryName : String? = null
+    private var subCategoryId : String? = null
 
     companion object {
         @JvmStatic
         fun newInstance(tagSubCategory: String) =
             ProductFragment().apply {
-                arguments = Bundle().apply {
-                    putString("subCategoryName", tagSubCategory)
-                }
+                arguments = Bundle().apply { putString("subCategoryId", tagSubCategory) }
             }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        subCategoryName = arguments?.getString("subCategoryName")
+        subCategoryId = arguments?.getString("subCategoryId")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,7 +45,6 @@ class ProductFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Toast.makeText(context, subCategoryName, Toast.LENGTH_SHORT).show()
 
         sort_by_distance.setOnClickListener {
             if(isPermissionGranted(base, Manifest.permission.ACCESS_FINE_LOCATION))
@@ -56,16 +53,16 @@ class ProductFragment : BaseFragment() {
                 toast("Permission not there")
         }
 
-        sort_by_price.setOnClickListener {
+        //sort_by_price.setOnClickListener {
             /*
             val firestoreQuery = firestore
             .collection("posts")
             .orderBy("date", Query.Direction.DESCENDING)
              */
-        }
+        //}
 
         setupFirestoreRecyclerView(productCollection
-            .whereEqualTo("subcategory.name", subCategoryName))
+            .whereEqualTo("subcategory.id", subCategoryId))
     }
 
     private fun setupFirestoreRecyclerView (query: Query) {
@@ -95,6 +92,10 @@ class ProductFragment : BaseFragment() {
                 product_cost_value.text = product.store["cost"]
                 product_store_location.text = product.store["location"]
 
+                Glide.with(base)
+                    .load(Firebase.storage.child("product/${product.image}"))
+                    .into(itemView.product_image)
+
                 arrayOf(
                     product_store_location_icon,
                     product_store_location
@@ -114,7 +115,6 @@ class ProductFragment : BaseFragment() {
                     product_cost
                 ).forEach {
                     it.setOnClickListener {
-                        logDebug(product.name + " " + product.store["name"])
                         (activity as MainActivity).let{
                             val intent = Intent (it, ProductActivity::class.java)
                             logError(Error(intent.toString()))

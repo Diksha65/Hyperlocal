@@ -54,7 +54,6 @@ class CategoryFragment : BaseFragment() {
         fun bindItems(category : Category) {
             itemView.apply {
                 category_name.text = category.name
-                logDebug("${category.image}")
 
                 Glide.with(base)
                     .load(storage.child("category/${category.image}"))
