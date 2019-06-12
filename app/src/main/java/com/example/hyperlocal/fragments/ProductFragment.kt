@@ -11,16 +11,23 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.hyperlocal.MainActivity
-import com.example.hyperlocal.model.Product
 import com.example.hyperlocal.ProductActivity
 import com.example.hyperlocal.R
 import com.example.hyperlocal.base.BaseFragment
-import com.example.hyperlocal.extensions.*
+import com.example.hyperlocal.extensions.Firebase
+import com.example.hyperlocal.extensions.Firebase.firestore
+import com.example.hyperlocal.extensions.isPermissionGranted
+import com.example.hyperlocal.extensions.productCollection
+import com.example.hyperlocal.extensions.storeCollection
+import com.example.hyperlocal.model.Product
+import com.example.hyperlocal.model.Store
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.Query
+import kotlinx.android.synthetic.main.product_item_view.*
 import kotlinx.android.synthetic.main.product_item_view.view.*
 import kotlinx.android.synthetic.main.product_recyclerview.*
+
 
 class ProductFragment : BaseFragment() {
 
@@ -53,13 +60,11 @@ class ProductFragment : BaseFragment() {
                 toast("Permission not there")
         }
 
-        //sort_by_price.setOnClickListener {
-            /*
-            val firestoreQuery = firestore
-            .collection("posts")
-            .orderBy("date", Query.Direction.DESCENDING)
-             */
-        //}
+        /*sort_by_price.setOnClickListener {
+            logError(Error("Clicked"))
+            setupFirestoreRecyclerView(productCollection
+                .orderBy("store.cost", Query.Direction.ASCENDING))
+        }*/
 
         setupFirestoreRecyclerView(productCollection
             .whereEqualTo("subcategory.id", subCategoryId))
@@ -88,9 +93,15 @@ class ProductFragment : BaseFragment() {
     inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItems(product: Product) {
             itemView.apply {
-                product_store_name.text = product.store["name"]
+                storeCollection.document(product.store["id"]!!)
+                    .get()
+                    .addOnSuccessListener {documentSnapshot ->
+                        val store = documentSnapshot.toObject(Store::class.java)
+                        product_store_name.text = store!!.name
+                        product_store_location.text = store.location
+                    }
+
                 product_cost_value.text = product.store["cost"]
-                product_store_location.text = product.store["location"]
 
                 Glide.with(base)
                     .load(Firebase.storage.child("product/${product.image}"))
