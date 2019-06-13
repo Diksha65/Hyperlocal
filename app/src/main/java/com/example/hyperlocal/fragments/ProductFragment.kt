@@ -62,7 +62,9 @@ class ProductFragment : BaseFragment() {
 
         /*sort_by_price.setOnClickListener {
             logError(Error("Clicked"))
+            toast("Sort by price clicked")
             setupFirestoreRecyclerView(productCollection
+                .whereEqualTo("subcategory.id", subCategoryId)
                 .orderBy("store.cost", Query.Direction.ASCENDING))
         }*/
 
@@ -93,7 +95,7 @@ class ProductFragment : BaseFragment() {
     inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItems(product: Product) {
             itemView.apply {
-                storeCollection.document(product.store["id"]!!)
+                storeCollection.document(product.store["id"].toString())
                     .get()
                     .addOnSuccessListener {documentSnapshot ->
                         val store = documentSnapshot.toObject(Store::class.java)
@@ -101,7 +103,7 @@ class ProductFragment : BaseFragment() {
                         product_store_location.text = store.location
                     }
 
-                product_cost_value.text = product.store["cost"]
+                product_cost_value.text = product.store["cost"].toString()
 
                 Glide.with(base)
                     .load(Firebase.storage.child("product/${product.image}"))

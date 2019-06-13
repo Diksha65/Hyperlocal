@@ -38,7 +38,7 @@ class AddProductActivity : BaseActivity() {
 
         product.ID = UUID.randomUUID().toString()
         product_name_value.onChange { text -> product.name = text }
-        product_cost_value.onChange { text -> product.store["cost"] = text}
+        product_cost_value.onChange { text -> product.store["cost"] = text.toInt()}
 
         setUpCategorySpinner(category_type_value) { selected ->
             product.category["name"] = selected
