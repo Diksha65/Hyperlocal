@@ -1,9 +1,9 @@
 package com.example.hyperlocal.base
 
-import android.R
 import android.content.Intent
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import com.example.hyperlocal.R
 import com.example.hyperlocal.extensions.*
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -60,5 +60,5 @@ abstract class BaseActivity : AppCompatActivity() {
             .add(containerID, fragment)
             .commit()
     }
-    
+
 }

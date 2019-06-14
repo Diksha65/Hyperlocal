@@ -1,6 +1,5 @@
 package com.example.hyperlocal.model
 
-import com.google.firebase.firestore.model.value.IntegerValue
 
 class Product (
     var ID : String = "",

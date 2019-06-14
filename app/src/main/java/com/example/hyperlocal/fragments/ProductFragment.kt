@@ -14,11 +14,8 @@ import com.example.hyperlocal.MainActivity
 import com.example.hyperlocal.ProductActivity
 import com.example.hyperlocal.R
 import com.example.hyperlocal.base.BaseFragment
-import com.example.hyperlocal.extensions.Firebase
+import com.example.hyperlocal.extensions.*
 import com.example.hyperlocal.extensions.Firebase.firestore
-import com.example.hyperlocal.extensions.isPermissionGranted
-import com.example.hyperlocal.extensions.productCollection
-import com.example.hyperlocal.extensions.storeCollection
 import com.example.hyperlocal.model.Product
 import com.example.hyperlocal.model.Store
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
@@ -55,7 +52,7 @@ class ProductFragment : BaseFragment() {
 
         sort_by_distance.setOnClickListener {
             if(isPermissionGranted(base, Manifest.permission.ACCESS_FINE_LOCATION))
-                toast("Permission there")
+                getCurrentLocation(base)
             else
                 toast("Permission not there")
         }
@@ -130,7 +127,7 @@ class ProductFragment : BaseFragment() {
                     it.setOnClickListener {
                         (activity as MainActivity).let{
                             val intent = Intent (it, ProductActivity::class.java)
-                            logError(Error(intent.toString()))
+                            intent.putExtra("ProductKey", product.ID)
                             it.startActivity(intent)
                         }
                     }

@@ -62,7 +62,7 @@ class SubCategoryFragment : BaseFragment() {
                 holder.bindItems(model)
             }
         }
-        productCategoryRecyclerView.layoutManager = LinearLayoutManager(context)
+        productCategoryRecyclerView.layoutManager = LinearLayoutManager(this.context)
         productCategoryRecyclerView.adapter = firestoreRecyclerAdapter
     }
 

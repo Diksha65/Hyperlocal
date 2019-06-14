@@ -8,7 +8,11 @@
 
     <ScrollView
             android:orientation="vertical"
-            android:layout_width="match_parent" android:layout_height="match_parent">
+            android:layout_width="match_parent" android:layout_height="match_parent" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp">
 
         <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
                                                      android:layout_height="wrap_content">
@@ -26,13 +30,14 @@
                     android:layout_marginLeft="8dp" android:layout_marginStart="8dp"/>
 
             <ImageView
-                    android:id="@+id/prod_images"
+                    android:id="@+id/prod_image"
                     android:layout_width="wrap_content"
                     android:layout_height="403dp"
                     android:src="@drawable/placeholder"
                     android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@+id/prod_name" app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
                     app:layout_constraintHorizontal_bias="0.0"/>
             <TextView
                     android:layout_width="wrap_content"
@@ -43,7 +48,7 @@
                     android:textStyle="normal"
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp" android:layout_marginTop="12dp"
-                    app:layout_constraintTop_toBottomOf="@+id/prod_images" app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/prod_image" app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
                     app:layout_constraintHorizontal_bias="0.027"/>
 
@@ -61,9 +66,11 @@
                     android:id="@+id/prod_store_loc"
                     android:hint="@string/hyperlocal_address"
                     app:layout_constraintStart_toEndOf="@+id/prod_store_loc_icon" android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp" android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@+id/prod_store_name" app:layout_constraintHorizontal_bias="0.014"/>
+                    app:layout_constraintTop_toBottomOf="@+id/prod_store_name"
+                    app:layout_constraintHorizontal_bias="0.014"/>
 
             <ImageView
                     android:layout_width="20dp"
@@ -71,7 +78,7 @@
                     android:id="@+id/prod_cost"
                     android:src="@drawable/ruppee"
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="20dp"
-                    android:layout_marginStart="20dp" android:layout_marginTop="4dp"
+                    android:layout_marginStart="20dp" android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/prod_store_loc_icon"/>
             <TextView
                     android:hint="@string/hyperlocal_cost"
@@ -81,7 +88,7 @@
                     android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-                    app:layout_constraintHorizontal_bias="0.006"
+                    app:layout_constraintHorizontal_bias="0.017"
                     app:layout_constraintTop_toTopOf="@+id/prod_cost" android:layout_marginTop="4dp"/>
 
             <ImageView
@@ -89,18 +96,20 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/distance"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/prod_cost" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="20dp" android:layout_marginStart="20dp"/>
+                    android:layout_marginLeft="20dp" android:layout_marginStart="20dp" android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
             <TextView
                     android:hint="@string/hyperlocal_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/prod_dist_value" app:layout_constraintStart_toEndOf="@+id/prod_dist"
-                    android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+                    android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/prod_cost_value" app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-                    app:layout_constraintHorizontal_bias="0.006"/>
+                    app:layout_constraintHorizontal_bias="0.006" android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
         </android.support.constraint.ConstraintLayout>
 

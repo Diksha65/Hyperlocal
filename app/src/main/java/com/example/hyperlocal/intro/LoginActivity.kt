@@ -91,7 +91,7 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun startApp() {
-        snackbar("Successful sign in!")
+        toast("Successful sign in!")
         finishAndStart(MainActivity::class.java)
     }
 }
