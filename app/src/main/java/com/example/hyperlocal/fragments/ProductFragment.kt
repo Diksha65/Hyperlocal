@@ -29,6 +29,7 @@ import kotlinx.android.synthetic.main.product_recyclerview.*
 class ProductFragment : BaseFragment() {
 
     private var subCategoryId : String? = null
+    private var store = Store()
 
     companion object {
         @JvmStatic
@@ -95,7 +96,7 @@ class ProductFragment : BaseFragment() {
                 storeCollection.document(product.store["id"].toString())
                     .get()
                     .addOnSuccessListener {documentSnapshot ->
-                        val store = documentSnapshot.toObject(Store::class.java)
+                        store = documentSnapshot.toObject(Store::class.java)!!
                         product_store_name.text = store!!.name
                         product_store_location.text = store.location
                     }
@@ -111,7 +112,7 @@ class ProductFragment : BaseFragment() {
                     product_store_location
                 ).forEach {
                     it.setOnClickListener {
-                        val uri = "http://maps.google.co.in/maps?q=${product.store["location"]}"
+                        val uri = "http://maps.google.co.in/maps?q=${store.location}"
                         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
                         startActivity(intent)
                     }
