@@ -3,6 +3,7 @@ package com.example.hyperlocal
 import android.os.Bundle
 import com.example.hyperlocal.base.BaseActivity
 import android.content.Intent
+import android.location.Address
 import android.net.Uri
 import com.bumptech.glide.Glide
 import com.example.hyperlocal.extensions.Firebase
@@ -11,6 +12,8 @@ import com.example.hyperlocal.extensions.storeCollection
 import com.example.hyperlocal.model.Product
 import com.example.hyperlocal.model.Store
 import kotlinx.android.synthetic.main.activity_product.*
+import android.location.Geocoder
+import com.example.hyperlocal.extensions.getLocationFromAddress
 
 
 class ProductActivity : BaseActivity() {
@@ -34,6 +37,7 @@ class ProductActivity : BaseActivity() {
                     .get()
                     .addOnSuccessListener { storeSnapshot ->
                         store =  storeSnapshot.toObject(Store::class.java)!!
+                        val loc = getLocationFromAddress(store.location, this)
                         updateViews(product, store)
                     }
             }
@@ -47,7 +51,11 @@ class ProductActivity : BaseActivity() {
             .into(prod_image)
         prod_store_name.text = store.name
         prod_store_loc.text = store.location
-        prod_cost_value.text = product.store["cost"].toString()
+        prod_cost_value.text = product.store["cost"].toString()/*
+        val geoLocation = geocoder.getFromLocationName(store.location, 1)[0]
+        val lat = geoLocation.latitude
+        val lng = geoLocation.longitude
+        prod_dist_value.text = lat.toString()*/
     }
 
     private fun onLocationClick() {
@@ -62,4 +70,6 @@ class ProductActivity : BaseActivity() {
             }
         }
     }
+
+
 }
