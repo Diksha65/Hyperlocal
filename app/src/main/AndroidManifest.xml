@@ -40,6 +40,9 @@
         <meta-data
                 android:name="io.fabric.ApiKey"
                 android:value="8f01b9cf8449ea2ff7e651bc19feceb0b7d0fdc4" />
+        <meta-data
+                android:name="OnlineRouting.Key"
+                android:value="ZcyGLOETYKoYfrtmD5nQ6ETUcC6GgY2N" />
 
         <activity android:name=".ProductActivity"
                   android:screenOrientation="portrait"/>
